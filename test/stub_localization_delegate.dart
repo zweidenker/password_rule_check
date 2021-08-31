@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-class StubLocalizationDelegate extends LocalizationsDelegate<MaterialLocalizations> {
+class StubLocalizationDelegate
+    extends LocalizationsDelegate<MaterialLocalizations> {
   @override
   bool isSupported(Locale locale) {
     return true;
@@ -12,7 +13,8 @@ class StubLocalizationDelegate extends LocalizationsDelegate<MaterialLocalizatio
   }
 
   @override
-  bool shouldReload(covariant LocalizationsDelegate<MaterialLocalizations> old) {
+  bool shouldReload(
+      covariant LocalizationsDelegate<MaterialLocalizations> old) {
     return false;
   }
 }

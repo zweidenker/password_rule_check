@@ -149,18 +149,18 @@ void main() {
 
       await tester.pumpWidget(MaterialApp(
           home: SingleChildScrollView(
-            child: PasswordRuleCheck(
-        controller: TextEditingController(),
-        translation: translation,
-        ruleSet: PasswordRuleSet(
+        child: PasswordRuleCheck(
+          controller: TextEditingController(),
+          translation: translation,
+          ruleSet: PasswordRuleSet(
             uppercase: 1,
             minLength: 1,
             maxLength: 1,
             digits: 1,
             specialCharacters: 1,
+          ),
         ),
-      ),
-          )));
+      )));
       await tester.pumpAndSettle();
 
       verify(() => translation.specialCharacters(any())).called(1);
