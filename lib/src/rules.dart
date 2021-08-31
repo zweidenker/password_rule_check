@@ -14,13 +14,25 @@ class PasswordRuleSet {
         }..removeWhere((key, value) => value == null))
             .cast<Rule, int>();
 
+  /// Number of uppercase Letters required
   final int? uppercase;
+
+  /// Minimum length of the password (inclusive)
   final int? minLength;
+
+  /// Maximum length of the password (inclusive)
   final int? maxLength;
+
+  /// Number of digits required
   final int? digits;
+
+  /// Number of special characters required
   final int? specialCharacters;
 
   final Map<Rule, int> _rules;
+
+  /// Get the rules included in this [PasswordRuleSet]
+  /// Returns a Map of [Rule]s and the corresponding amount/length
   Map<Rule, int> get rules => _rules;
 
   /// Validates a given [input] against the parameters defined at creation
@@ -62,9 +74,18 @@ class PasswordRuleSet {
 }
 
 enum Rule {
+  /// Checks for Uppercase Letters
   uppercaseLetters,
+
+  /// Checks for minimum length (inclusive)
   minLength,
+
+  /// Checks for maximum length (inclusive)
   maxLength,
+
+  /// Checks for digits
   digits,
+
+  /// Checks for special Characters
   specialCharacters,
 }

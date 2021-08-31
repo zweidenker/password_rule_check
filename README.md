@@ -1,14 +1,14 @@
-# password_rule_check
+# PasswordRuleCheck
+[![Pub](https://img.shields.io/pub/v/password_rule_check.svg)](https://pub.dartlang.org/packages/password_rule_check)
+[![pub points](https://badges.bar/home_widget/pub%20points)](https://pub.dev/packages/home_widget/score)
+[![Build](https://github.com/zweidenker/password_rule_check/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/zweidenker/password_rule_check/actions/workflows/main.yml?query=branch%3Amain)
 
-A new Flutter package project.
+A Flutter Widget to show if a Password matches a specific Rule Set
 
-## Getting Started
+## Supported Checks
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+* minimum Length
+* maximum Length
+* minimum number of uppercase Letters
+* minimum number of digits
+* minimum number of special characters

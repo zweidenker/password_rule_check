@@ -23,19 +23,30 @@ class PasswordRuleCheck extends StatefulWidget {
     this.textPadding = const EdgeInsets.symmetric(vertical: 4.0),
   }) : super(key: key);
 
+  /// [TextEditingController] of the Input Field
   final TextEditingController controller;
 
+  /// Color used if a Rule is met
+  /// Defaults to [Colors.green]
   final Color? successColor;
+
+  /// Color used if a Rule is not met
+  /// Defaults to the ErrorColor of the App Theme
   final Color? errorColor;
 
+  /// TextStyle of the Rule Hints
   final TextStyle? textStyle;
 
+  /// [PasswordRuleSet] that the password should be checked against
   final PasswordRuleSet ruleSet;
 
+  /// Custom Translations for Rule Texts
   final PasswordRuleCheckTranslation? translation;
 
+  /// Toggles visibility of Icons next to the Rule Text
   final bool showIcon;
 
+  /// Padding of the TextElements showing the PasswordRules
   final EdgeInsets textPadding;
 
   @override
@@ -70,6 +81,9 @@ class PasswordRuleCheckState extends State<PasswordRuleCheck> {
     _textChangeListener?.call();
   }
 
+  /// Validates the current input
+  /// returns true if all Rules are met
+  /// otherwise it returns false
   bool validate() => _validationErrors.isEmpty;
 
   @override
