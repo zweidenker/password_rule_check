@@ -1,3 +1,4 @@
+// coverage:ignore-file
 part of password_rule_check_translations;
 
 class EnglishTranslation extends PasswordRuleCheckTranslation {
