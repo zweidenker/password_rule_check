@@ -70,12 +70,12 @@ class PasswordRuleCheckState extends State<PasswordRuleCheck> {
           EnglishTranslation();
     });
 
-    widget.controller.removeListener(_textChangeListener ?? () {});
-
     _textChangeListener = () {
-      setState(() {
-        _validationErrors = widget.ruleSet.validate(widget.controller.text);
-      });
+      if (mounted) {
+        setState(() {
+          _validationErrors = widget.ruleSet.validate(widget.controller.text);
+        });
+      }
     };
     widget.controller.addListener(_textChangeListener!);
     _textChangeListener?.call();
