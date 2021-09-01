@@ -13,12 +13,12 @@ class GermanTranslation extends PasswordRuleCheckTranslation {
 
   @override
   String maxLength(int length) {
-    return 'Kürzer als $length';
+    return 'Kürzer als $length Zeichen';
   }
 
   @override
   String minLength(int length) {
-    return 'Länger als $length';
+    return 'Länger als $length Zeichen';
   }
 
   @override
