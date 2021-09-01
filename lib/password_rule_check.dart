@@ -88,7 +88,7 @@ class PasswordRuleCheckState extends State<PasswordRuleCheck> {
 
   @override
   Widget build(BuildContext context) {
-    final errorColor = widget.errorColor ?? Theme.of(context).errorColor;
+    final errorColor = widget.errorColor ?? Theme.of(context).colorScheme.error;
     final successColor = widget.successColor ?? Colors.green;
     return Column(
       mainAxisSize: MainAxisSize.min,
