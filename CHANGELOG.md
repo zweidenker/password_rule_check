@@ -1,3 +1,6 @@
+## 0.1.0
+* Add more customization options
+
 ## 0.0.1+3
 * Add Rule for lowercase letter
 
