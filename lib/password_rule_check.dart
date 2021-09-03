@@ -21,6 +21,9 @@ class PasswordRuleCheck extends StatefulWidget {
     this.translation,
     this.showIcon = false,
     this.textPadding = const EdgeInsets.symmetric(vertical: 4.0),
+    this.rowHeight = 16,
+    this.rowRadius = const BorderRadius.all(Radius.zero),
+    this.rowSpacing = 0,
   }) : super(key: key);
 
   /// [TextEditingController] of the Input Field
@@ -48,6 +51,15 @@ class PasswordRuleCheck extends StatefulWidget {
 
   /// Padding of the TextElements showing the PasswordRules
   final EdgeInsets textPadding;
+
+  /// Height of the validation bar. Defaults to 46
+  final double rowHeight;
+
+  /// Radius of each Segment in the validation bar. Defaults to 0
+  final BorderRadiusGeometry rowRadius;
+
+  /// Spacing between segments in the validation bar. Default to 0
+  final double rowSpacing;
 
   @override
   PasswordRuleCheckState createState() => PasswordRuleCheckState();
@@ -99,7 +111,9 @@ class PasswordRuleCheckState extends State<PasswordRuleCheck> {
           length: widget.ruleSet.rules.length,
           errorColor: errorColor,
           successColor: successColor,
-          height: 16,
+          height: widget.rowHeight,
+          radius: widget.rowRadius,
+          spacing: widget.rowSpacing,
         ),
         ...widget.ruleSet.rules.entries.map(
           (rule) {

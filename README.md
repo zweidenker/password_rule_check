@@ -5,6 +5,10 @@
 
 A Flutter Widget to show if a Password matches a specific Rule Set
 
+|<img src="https://github.com/zweidenker/password_rule_check/blob/main/.github/assets/standard.png?raw=true" width="500px"> |<img src="https://github.com/zweidenker/password_rule_check/blob/main/.github/assets/customized.png?raw=true" width="500px"> |
+|--------|------------|
+
+
 ## Supported Checks
 
 * minimum Length
@@ -13,3 +17,22 @@ A Flutter Widget to show if a Password matches a specific Rule Set
 * minimum number of lowercase Letters
 * minimum number of digits
 * minimum number of special characters
+
+## Localizations
+
+Supported Languages:
+* English 🇺🇸🇬🇧
+* German 🇩🇪
+
+Feel free to add a new language via a Pull Request
+Alternatively you can specify custom translations/texts by passing in a custom `PasswordRuleCheckTranslation`
+```dart
+class MyCustomTranslation extends PasswordRuleCheckTranslation {
+  // Override for your custom Translations
+}
+
+PasswordRuleCheck(
+  ruleSet: RuleSet(),
+  translation: MyCustomTranslation(),
+);
+```

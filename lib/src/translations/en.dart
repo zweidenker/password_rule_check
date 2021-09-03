@@ -1,6 +1,7 @@
 // coverage:ignore-file
 part of password_rule_check_translations;
 
+/// English Translations for rule texts
 class EnglishTranslation extends PasswordRuleCheckTranslation {
   @override
   String digits(int amount) {
