@@ -38,4 +38,13 @@ class EnglishTranslation extends PasswordRuleCheckTranslation {
       return 'Must contain at least $amount capital letters';
     }
   }
+
+  @override
+  String lowercase(int amount) {
+    if (amount == 1) {
+      return 'Must contain at least 1 lowercase letter';
+    } else {
+      return 'Must contain at least $amount lowercase letters';
+    }
+  }
 }

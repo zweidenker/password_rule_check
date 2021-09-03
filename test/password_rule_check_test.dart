@@ -145,6 +145,7 @@ void main() {
       when(() => translation.minLength(any())).thenReturn('');
       when(() => translation.maxLength(any())).thenReturn('');
       when(() => translation.uppercase(any())).thenReturn('');
+      when(() => translation.lowercase(any())).thenReturn('');
       when(() => translation.digits(any())).thenReturn('');
 
       await tester.pumpWidget(MaterialApp(
@@ -154,6 +155,7 @@ void main() {
           translation: translation,
           ruleSet: PasswordRuleSet(
             uppercase: 1,
+            lowercase: 1,
             minLength: 1,
             maxLength: 1,
             digits: 1,
@@ -167,6 +169,7 @@ void main() {
       verify(() => translation.minLength(any())).called(1);
       verify(() => translation.maxLength(any())).called(1);
       verify(() => translation.uppercase(any())).called(1);
+      verify(() => translation.lowercase(any())).called(1);
       verify(() => translation.digits(any())).called(1);
     });
   });

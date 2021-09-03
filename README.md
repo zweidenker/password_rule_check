@@ -10,5 +10,6 @@ A Flutter Widget to show if a Password matches a specific Rule Set
 * minimum Length
 * maximum Length
 * minimum number of uppercase Letters
+* minimum number of lowercase Letters
 * minimum number of digits
 * minimum number of special characters

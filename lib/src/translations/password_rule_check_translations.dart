@@ -5,6 +5,7 @@ part 'package:password_rule_check/src/translations/de.dart';
 
 abstract class PasswordRuleCheckTranslation {
   String uppercase(int amount);
+  String lowercase(int amount);
   String minLength(int length);
   String maxLength(int length);
   String digits(int amount);

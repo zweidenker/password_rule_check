@@ -1,3 +1,6 @@
+## 0.0.1+3
+* Add Rule for lowercase letter
+
 ## 0.0.1+2
 * Check if Widget is mounted before validating
 * Get ErrorColor from ColorScheme

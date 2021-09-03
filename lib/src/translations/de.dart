@@ -38,4 +38,13 @@ class GermanTranslation extends PasswordRuleCheckTranslation {
       return 'Mindestens $amount Großbuchstaben';
     }
   }
+
+  @override
+  String lowercase(int amount) {
+    if (amount == 1) {
+      return 'Mindestens 1 Kleinbuchstabe';
+    } else {
+      return 'Mindestens $amount Kleinbuchstaben';
+    }
+  }
 }

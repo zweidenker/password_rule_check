@@ -1,6 +1,6 @@
 name: password_rule_check
 description: A Flutter Widget to display if a password matches given Rules
-version: 0.0.1+2
+version: 0.0.1+3
 homepage: https://github.com/zweidenker/password_rule_check
 
 environment:

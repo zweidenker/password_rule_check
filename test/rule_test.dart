@@ -36,6 +36,32 @@ void main() {
     });
   });
 
+  group('Lowercase', () {
+    test(
+        'Not sufficient Lowercase Letters '
+        'returns Set containing ValidationOption', () {
+      final validator = PasswordRuleSet(lowercase: 3);
+
+      expect(validator.validate('AaaA'), {Rule.lowercaseLetters});
+    });
+
+    test(
+        'Sufficient Lowercase Letters '
+        'has no validation Errors', () {
+      final validator = PasswordRuleSet(lowercase: 3);
+
+      expect(validator.validate('AaaaA'), <Rule>{});
+    });
+
+    test(
+        'More than required Lowercase Letters '
+        'has no validation Errors', () {
+      final validator = PasswordRuleSet(lowercase: 3);
+
+      expect(validator.validate('AaaAaAa'), <Rule>{});
+    });
+  });
+
   group('Digits', () {
     test(
         'Not sufficient Digits '

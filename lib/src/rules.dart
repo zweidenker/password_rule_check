@@ -1,12 +1,14 @@
 class PasswordRuleSet {
   PasswordRuleSet(
       {this.uppercase,
+      this.lowercase,
       this.minLength,
       this.maxLength,
       this.digits,
       this.specialCharacters})
       : _rules = (<Rule, int?>{
           Rule.uppercaseLetters: uppercase,
+          Rule.lowercaseLetters: lowercase,
           Rule.minLength: minLength,
           Rule.maxLength: maxLength,
           Rule.digits: digits,
@@ -16,6 +18,9 @@ class PasswordRuleSet {
 
   /// Number of uppercase Letters required
   final int? uppercase;
+
+  /// Number of lowercase Letters required
+  final int? lowercase;
 
   /// Minimum length of the password (inclusive)
   final int? minLength;
@@ -49,6 +54,10 @@ class PasswordRuleSet {
           final regExp = RegExp(r'[A-Z]{1}');
           matching = regExp.allMatches(input).length >= rule.value;
           break;
+        case Rule.lowercaseLetters:
+          final regExp = RegExp(r'[a-z]{1}');
+          matching = regExp.allMatches(input).length >= rule.value;
+          break;
         case Rule.minLength:
           matching = input.length >= rule.value;
           break;
@@ -74,8 +83,11 @@ class PasswordRuleSet {
 }
 
 enum Rule {
-  /// Checks for Uppercase Letters
+  /// Checks for uppercase Letters
   uppercaseLetters,
+
+  /// Checks for lowercase Letters
+  lowercaseLetters,
 
   /// Checks for minimum length (inclusive)
   minLength,

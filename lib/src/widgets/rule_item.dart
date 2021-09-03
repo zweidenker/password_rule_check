@@ -28,6 +28,9 @@ class RuleItem extends StatelessWidget {
       case Rule.uppercaseLetters:
         message = translation.uppercase(value);
         break;
+      case Rule.lowercaseLetters:
+        message = translation.lowercase(value);
+        break;
       case Rule.minLength:
         message = translation.minLength(value);
         break;
