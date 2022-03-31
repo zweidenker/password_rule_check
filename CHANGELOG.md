@@ -1,3 +1,6 @@
+## 0.2.0
+* Add option to just show a bar indicating if a password is matching certain rules
+
 ## 0.1.0
 * Add more customization options
 
