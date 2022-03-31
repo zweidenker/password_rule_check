@@ -23,7 +23,10 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           locale: Locale('ww'),
           supportedLocales: [Locale('ww')],
-          localizationsDelegates: [StubMaterialLocalizationDelegate(), StubCupertinoLocalizationDelegate()],
+          localizationsDelegates: [
+            StubMaterialLocalizationDelegate(),
+            StubCupertinoLocalizationDelegate()
+          ],
           home: PasswordRuleCheck(
               controller: TextEditingController(),
               ruleSet: PasswordRuleSet(uppercase: 1))));
@@ -173,38 +176,40 @@ void main() {
     });
   });
 
-  group('Suggested Safety Bar' ,() {
+  group('Suggested Safety Bar', () {
     testWidgets('Main Rule not met, shows error bar', (tester) async {
       final errorColor = Colors.pink;
       await tester.pumpWidget(MaterialApp(
           home: PasswordRuleCheck.suggestedSafety(
-              controller: TextEditingController(text: 'a'),
-              errorColor: errorColor,
-              ruleSet: PasswordRuleSet(uppercase: 1),
-          optimalRules: [],)));
+        controller: TextEditingController(text: 'a'),
+        errorColor: errorColor,
+        ruleSet: PasswordRuleSet(uppercase: 1),
+        optimalRules: [],
+      )));
       await tester.pump();
 
       expect(
-          ((tester.widget(find.byType(DecoratedBox)) as DecoratedBox)
-              .decoration as BoxDecoration)
+          ((tester.widget(find.byType(DecoratedBox)) as DecoratedBox).decoration
+                  as BoxDecoration)
               .color,
           errorColor);
     });
 
-
-    testWidgets('Main Rule met, no optimal provided shows green', (tester) async {
+    testWidgets('Main Rule met, no optimal provided shows green',
+        (tester) async {
       final successColor = Colors.pink;
       await tester.pumpWidget(MaterialApp(
           home: PasswordRuleCheck.suggestedSafety(
-            controller: TextEditingController(text: 'A'),
-            successColor: successColor,
-            ruleSet: PasswordRuleSet(uppercase: 1),
-            optimalRules: [],)));
+        controller: TextEditingController(text: 'A'),
+        successColor: successColor,
+        ruleSet: PasswordRuleSet(uppercase: 1),
+        optimalRules: [],
+      )));
       await tester.pump();
 
       expect(
-          ((tester.widget(find.byType(DecoratedBox)) as DecoratedBox)
-              .decoration as BoxDecoration)
+          ((tester.widget(find.byType(DecoratedBox)) as DecoratedBox).decoration
+                  as BoxDecoration)
               .color,
           successColor);
     });
@@ -213,19 +218,20 @@ void main() {
       final successColor = Colors.pink;
       await tester.pumpWidget(MaterialApp(
           home: PasswordRuleCheck.suggestedSafety(
-            controller: TextEditingController(text: 'Aa'),
-            successColor: successColor,
-            ruleSet: PasswordRuleSet(uppercase: 1),
-            optimalRules: [
-              PasswordRuleSet(
-                minLength: 2,
-              )
-            ],)));
+        controller: TextEditingController(text: 'Aa'),
+        successColor: successColor,
+        ruleSet: PasswordRuleSet(uppercase: 1),
+        optimalRules: [
+          PasswordRuleSet(
+            minLength: 2,
+          )
+        ],
+      )));
       await tester.pump();
 
       expect(
-          ((tester.widget(find.byType(DecoratedBox)) as DecoratedBox)
-              .decoration as BoxDecoration)
+          ((tester.widget(find.byType(DecoratedBox)) as DecoratedBox).decoration
+                  as BoxDecoration)
               .color,
           successColor);
     });
@@ -234,19 +240,20 @@ void main() {
       final acceptColor = Colors.pink;
       await tester.pumpWidget(MaterialApp(
           home: PasswordRuleCheck.suggestedSafety(
-            controller: TextEditingController(text: 'A'),
-            acceptColor: acceptColor,
-            ruleSet: PasswordRuleSet(uppercase: 1),
-            optimalRules: [
-              PasswordRuleSet(
-                minLength: 2,
-              )
-            ],)));
+        controller: TextEditingController(text: 'A'),
+        acceptColor: acceptColor,
+        ruleSet: PasswordRuleSet(uppercase: 1),
+        optimalRules: [
+          PasswordRuleSet(
+            minLength: 2,
+          )
+        ],
+      )));
       await tester.pump();
 
       expect(
-          ((tester.widget(find.byType(DecoratedBox)) as DecoratedBox)
-              .decoration as BoxDecoration)
+          ((tester.widget(find.byType(DecoratedBox)) as DecoratedBox).decoration
+                  as BoxDecoration)
               .color,
           acceptColor);
     });

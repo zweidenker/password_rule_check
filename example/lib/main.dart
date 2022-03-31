@@ -63,6 +63,8 @@ class _ExamplePageState extends State<ExamplePage> {
                 validator: (_) {
                   if (_ruleCheckKey.currentState?.validate() == false) {
                     return 'Password does not meet standard';
+                  } else {
+                    return null;
                   }
                 },
               ),
