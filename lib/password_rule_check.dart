@@ -1,7 +1,6 @@
 library password_rule_check;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:password_rule_check/src/rules.dart';
 import 'package:password_rule_check/src/translations/password_rule_check_translations.dart';
 import 'package:password_rule_check/src/widgets/rule_item.dart';
@@ -24,7 +23,27 @@ class PasswordRuleCheck extends StatefulWidget {
     this.rowHeight = 16,
     this.rowRadius = const BorderRadius.all(Radius.zero),
     this.rowSpacing = 0,
-  }) : super(key: key);
+  })  : acceptColor = Colors.amber,
+        optimalRules = null,
+        super(key: key);
+
+  const PasswordRuleCheck.suggestedSafety({
+    Key? key,
+    required this.controller,
+    required this.ruleSet,
+    required List<PasswordRuleSet> optimalRules,
+    this.successColor,
+    this.errorColor,
+    this.acceptColor,
+    this.textStyle,
+    this.translation,
+    this.rowHeight = 16,
+    this.rowRadius = const BorderRadius.all(Radius.zero),
+  })  : this.optimalRules = optimalRules,
+        this.showIcon = false,
+        this.textPadding = const EdgeInsets.symmetric(vertical: 4.0),
+        this.rowSpacing = 0,
+        super(key: key);
 
   /// [TextEditingController] of the Input Field
   final TextEditingController controller;
@@ -32,6 +51,10 @@ class PasswordRuleCheck extends StatefulWidget {
   /// Color used if a Rule is met
   /// Defaults to [Colors.green]
   final Color? successColor;
+
+  /// Color used if a Password is OK but could be better
+  /// Defaults to [Colors.amber]
+  final Color? acceptColor;
 
   /// Color used if a Rule is not met
   /// Defaults to the ErrorColor of the App Theme
@@ -42,6 +65,9 @@ class PasswordRuleCheck extends StatefulWidget {
 
   /// [PasswordRuleSet] that the password should be checked against
   final PasswordRuleSet ruleSet;
+
+  /// Rules that are not required but would increase the password strength
+  final List<PasswordRuleSet>? optimalRules;
 
   /// Custom Translations for Rule Texts
   final PasswordRuleCheckTranslation? translation;
@@ -72,6 +98,8 @@ class PasswordRuleCheckState extends State<PasswordRuleCheck> {
 
   PasswordRuleCheckTranslation _translation = EnglishTranslation();
 
+  bool _isOptimal = false;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -86,6 +114,12 @@ class PasswordRuleCheckState extends State<PasswordRuleCheck> {
       if (mounted) {
         setState(() {
           _validationErrors = widget.ruleSet.validate(widget.controller.text);
+          _isOptimal = (widget.optimalRules?.isEmpty == true) ||
+              (widget.optimalRules
+                      ?.map((rulesSets) =>
+                          rulesSets.validate(widget.controller.text))
+                      .any((checks) => checks.isEmpty) ??
+                  false);
         });
       }
     };
@@ -102,40 +136,61 @@ class PasswordRuleCheckState extends State<PasswordRuleCheck> {
   Widget build(BuildContext context) {
     final errorColor = widget.errorColor ?? Theme.of(context).colorScheme.error;
     final successColor = widget.successColor ?? Colors.green;
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        RuleProgressBar(
-          errors: _validationErrors.length,
-          length: widget.ruleSet.rules.length,
-          errorColor: errorColor,
-          successColor: successColor,
-          height: widget.rowHeight,
-          radius: widget.rowRadius,
-          spacing: widget.rowSpacing,
-        ),
-        ...widget.ruleSet.rules.entries.map(
-          (rule) {
-            final valid = !_validationErrors.contains(rule.key);
-            return Padding(
-              padding: widget.textPadding,
-              child: RuleItem(
-                rule: rule.key,
-                value: rule.value,
-                translation: _translation,
-                color: valid ? successColor : errorColor,
-                icon: widget.showIcon
-                    ? valid
-                        ? Icons.check_circle
-                        : Icons.remove_circle_outline
-                    : null,
-                textStyle: widget.textStyle,
-              ),
-            );
-          },
-        ).toList(),
-      ],
-    );
+    if (widget.optimalRules == null) {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          RuleProgressBar(
+            errors: _validationErrors.length,
+            length: widget.ruleSet.rules.length,
+            errorColor: errorColor,
+            successColor: successColor,
+            height: widget.rowHeight,
+            radius: widget.rowRadius,
+            spacing: widget.rowSpacing,
+          ),
+          ...widget.ruleSet.rules.entries.map(
+            (rule) {
+              final valid = !_validationErrors.contains(rule.key);
+              return Padding(
+                padding: widget.textPadding,
+                child: RuleItem(
+                  rule: rule.key,
+                  value: rule.value,
+                  translation: _translation,
+                  color: valid ? successColor : errorColor,
+                  icon: widget.showIcon
+                      ? valid
+                          ? Icons.check_circle
+                          : Icons.remove_circle_outline
+                      : null,
+                  textStyle: widget.textStyle,
+                ),
+              );
+            },
+          ).toList(),
+        ],
+      );
+    } else {
+      final acceptColor = widget.acceptColor ?? Colors.amber;
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Container(
+            height: widget.rowHeight,
+            decoration: BoxDecoration(
+              borderRadius: widget.rowRadius,
+              color: _validationErrors.isNotEmpty
+                  ? errorColor
+                  : _isOptimal
+                      ? successColor
+                      : acceptColor,
+            ),
+          ),
+        ],
+      );
+    }
   }
 }

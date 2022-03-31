@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -24,7 +23,10 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           locale: Locale('ww'),
           supportedLocales: [Locale('ww')],
-          localizationsDelegates: [StubLocalizationDelegate()],
+          localizationsDelegates: [
+            StubMaterialLocalizationDelegate(),
+            StubCupertinoLocalizationDelegate()
+          ],
           home: PasswordRuleCheck(
               controller: TextEditingController(),
               ruleSet: PasswordRuleSet(uppercase: 1))));
@@ -171,6 +173,89 @@ void main() {
       verify(() => translation.uppercase(any())).called(1);
       verify(() => translation.lowercase(any())).called(1);
       verify(() => translation.digits(any())).called(1);
+    });
+  });
+
+  group('Suggested Safety Bar', () {
+    testWidgets('Main Rule not met, shows error bar', (tester) async {
+      final errorColor = Colors.pink;
+      await tester.pumpWidget(MaterialApp(
+          home: PasswordRuleCheck.suggestedSafety(
+        controller: TextEditingController(text: 'a'),
+        errorColor: errorColor,
+        ruleSet: PasswordRuleSet(uppercase: 1),
+        optimalRules: [],
+      )));
+      await tester.pump();
+
+      expect(
+          ((tester.widget(find.byType(DecoratedBox)) as DecoratedBox).decoration
+                  as BoxDecoration)
+              .color,
+          errorColor);
+    });
+
+    testWidgets('Main Rule met, no optimal provided shows green',
+        (tester) async {
+      final successColor = Colors.pink;
+      await tester.pumpWidget(MaterialApp(
+          home: PasswordRuleCheck.suggestedSafety(
+        controller: TextEditingController(text: 'A'),
+        successColor: successColor,
+        ruleSet: PasswordRuleSet(uppercase: 1),
+        optimalRules: [],
+      )));
+      await tester.pump();
+
+      expect(
+          ((tester.widget(find.byType(DecoratedBox)) as DecoratedBox).decoration
+                  as BoxDecoration)
+              .color,
+          successColor);
+    });
+
+    testWidgets('Optimal Rule met shows success color', (tester) async {
+      final successColor = Colors.pink;
+      await tester.pumpWidget(MaterialApp(
+          home: PasswordRuleCheck.suggestedSafety(
+        controller: TextEditingController(text: 'Aa'),
+        successColor: successColor,
+        ruleSet: PasswordRuleSet(uppercase: 1),
+        optimalRules: [
+          PasswordRuleSet(
+            minLength: 2,
+          )
+        ],
+      )));
+      await tester.pump();
+
+      expect(
+          ((tester.widget(find.byType(DecoratedBox)) as DecoratedBox).decoration
+                  as BoxDecoration)
+              .color,
+          successColor);
+    });
+
+    testWidgets('Minimum met, optimal not, shows accept color', (tester) async {
+      final acceptColor = Colors.pink;
+      await tester.pumpWidget(MaterialApp(
+          home: PasswordRuleCheck.suggestedSafety(
+        controller: TextEditingController(text: 'A'),
+        acceptColor: acceptColor,
+        ruleSet: PasswordRuleSet(uppercase: 1),
+        optimalRules: [
+          PasswordRuleSet(
+            minLength: 2,
+          )
+        ],
+      )));
+      await tester.pump();
+
+      expect(
+          ((tester.widget(find.byType(DecoratedBox)) as DecoratedBox).decoration
+                  as BoxDecoration)
+              .color,
+          acceptColor);
     });
   });
 }
