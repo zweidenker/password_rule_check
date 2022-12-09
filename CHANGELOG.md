@@ -1,3 +1,6 @@
+## 0.2.1
+* 🇵🇹 Add portuguese translation thanks to [@b7anka](https://github.com/b7anka)
+
 ## 0.2.0
 * Add option to just show a bar indicating if a password is matching certain rules
 
