@@ -1,6 +1,6 @@
 # PasswordRuleCheck
 [![Pub](https://img.shields.io/pub/v/password_rule_check.svg)](https://pub.dartlang.org/packages/password_rule_check)
-[![pub points](https://badges.bar/password_rule_check/pub%20points)](https://pub.dev/packages/password_rule_check/score)
+[![pub points](https://img.shields.io/pub/points/password_rule_check?logo=dart)](https://pub.dev/packages/password_rule_check/score)
 [![Build](https://github.com/zweidenker/password_rule_check/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/zweidenker/password_rule_check/actions/workflows/main.yml?query=branch%3Amain)
 
 A Flutter Widget to show if a Password matches a specific Rule Set
