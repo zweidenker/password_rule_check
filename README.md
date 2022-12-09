@@ -5,8 +5,8 @@
 
 A Flutter Widget to show if a Password matches a specific Rule Set
 
-|<img src="https://github.com/zweidenker/password_rule_check/blob/main/.github/assets/standard.png?raw=true" width="500px"> |<img src="https://github.com/zweidenker/password_rule_check/blob/main/.github/assets/customized.png?raw=true" width="500px"> |
-|--------|------------|
+| <img src="https://github.com/zweidenker/password_rule_check/blob/main/.github/assets/standard.png?raw=true" width="500px"> | <img src="https://github.com/zweidenker/password_rule_check/blob/main/.github/assets/customized.png?raw=true" width="500px"> |
+|----------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|
 
 
 ## Supported Checks
@@ -23,6 +23,7 @@ A Flutter Widget to show if a Password matches a specific Rule Set
 Supported Languages:
 * English 🇺🇸🇬🇧
 * German 🇩🇪
+* Portuguese 🇵🇹
 
 Feel free to add a new language via a Pull Request
 Alternatively you can specify custom translations/texts by passing in a custom `PasswordRuleCheckTranslation`
