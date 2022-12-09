@@ -2,6 +2,7 @@ library password_rule_check_translations;
 
 part 'package:password_rule_check/src/translations/en.dart';
 part 'package:password_rule_check/src/translations/de.dart';
+part 'package:password_rule_check/src/translations/pt.dart';
 
 abstract class PasswordRuleCheckTranslation {
   /// String used to get a message saying that [amount] uppercase letters are required
@@ -27,4 +28,5 @@ abstract class PasswordRuleCheckTranslation {
 Map<String, PasswordRuleCheckTranslation> get translations => {
       'en': EnglishTranslation(),
       'de': GermanTranslation(),
+      'pt': PortugueseTranslation()
     };
